@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GreenChat</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+  <!-- Username entry overlay -->
+  <div id="login-screen" class="screen">
+    <div class="login-box">
+      <pre class="ascii-title">
+  ██████╗ ██████╗ ███████╗███████╗███╗   ██╗
+ ██╔════╝ ██╔══██╗██╔════╝██╔════╝████╗  ██║
+ ██║  ███╗██████╔╝█████╗  █████╗  ██╔██╗ ██║
+ ██║   ██║██╔══██╗██╔══╝  ██╔══╝  ██║╚██╗██║
+ ╚██████╔╝██║  ██║███████╗███████╗██║ ╚████║
+  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═══╝
+        C H A T
+      </pre>
+      <p class="subtitle">// local network terminal chat</p>
+      <input
+        type="text"
+        id="username-input"
+        placeholder="enter your username_"
+        maxlength="20"
+        autocomplete="off"
+      />
+      <button id="join-btn">CONNECT</button>
+      <p id="login-error" class="error-text"></p>
+    </div>
+  </div>
+
+  <!-- Main chat screen -->
+  <div id="chat-screen" class="screen hidden">
+    <header class="chat-header">
+      <div class="brand">GreenChat<span class="cursor">_</span></div>
+      <div id="connection-status" class="status disconnected">
+        <span class="dot"></span> DISCONNECTED
+      </div>
+    </header>
+
+    <div class="chat-body">
+      <aside class="sidebar">
+        <h3>ONLINE</h3>
+        <ul id="user-list"></ul>
+      </aside>
+
+      <main class="chat-main">
+        <div id="messages" class="messages"></div>
+        <div id="typing-indicator" class="typing-indicator"></div>
+
+        <div id="attachment-preview" class="attachment-preview hidden">
+          <span id="attachment-icon" class="attachment-icon">📎</span>
+          <span id="attachment-name" class="attachment-name"></span>
+          <span id="attachment-size" class="attachment-size"></span>
+          <button type="button" id="attachment-remove" class="attachment-remove" title="Remove attachment">✕</button>
+        </div>
+
+        <form id="message-form" class="message-form">
+          <span class="prompt">&gt;</span>
+
+          <button type="button" id="attach-btn" class="attach-btn" title="Attach a file">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21.44 11.05l-9.19 9.19a5.5 5.5 0 0 1-7.78-7.78l9.19-9.19a3.5 3.5 0 0 1 4.95 4.95l-9.2 9.19a1.5 1.5 0 0 1-2.12-2.12l8.49-8.48"></path>
+            </svg>
+          </button>
+          <input type="file" id="file-input" class="file-input-hidden" />
+
+          <input
+            type="text"
+            id="message-input"
+            placeholder="type a message..."
+            autocomplete="off"
+            maxlength="500"
+          />
+          <button type="submit">SEND</button>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.min.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,430 @@
+:root {
+  --bg: #000000;
+  --bg-panel: #0a0f0a;
+  --bg-input: #0d150d;
+  --green-bright: #33ff66;
+  --green: #22cc55;
+  --green-dim: #146b2e;
+  --green-muted: #4a7a5a;
+  --red: #ff4444;
+  --border: #1e4d2b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--green-bright);
+  font-family: "Consolas", "Courier New", monospace;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.screen {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Login screen ---------- */
+.login-box {
+  text-align: center;
+  padding: 2rem;
+  border: 1px solid var(--border);
+  background: var(--bg-panel);
+  box-shadow: 0 0 25px rgba(51, 255, 102, 0.15);
+  max-width: 90vw;
+}
+
+.ascii-title {
+  color: var(--green-bright);
+  font-size: 0.55rem;
+  line-height: 1.1;
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 0 6px rgba(51, 255, 102, 0.6);
+  white-space: pre;
+}
+
+.subtitle {
+  color: var(--green-muted);
+  margin: 0 0 1.5rem 0;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+#username-input {
+  width: 260px;
+  max-width: 80vw;
+  padding: 0.6rem 0.8rem;
+  background: var(--bg-input);
+  border: 1px solid var(--green-dim);
+  color: var(--green-bright);
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  margin-bottom: 1rem;
+}
+
+#username-input:focus {
+  border-color: var(--green-bright);
+  box-shadow: 0 0 8px rgba(51, 255, 102, 0.4);
+}
+
+#username-input::placeholder {
+  color: var(--green-dim);
+}
+
+button {
+  cursor: pointer;
+  background: var(--bg-input);
+  color: var(--green-bright);
+  border: 1px solid var(--green);
+  padding: 0.6rem 1.4rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: all 0.15s ease-in-out;
+}
+
+button:hover {
+  background: var(--green);
+  color: #000;
+  box-shadow: 0 0 12px rgba(51, 255, 102, 0.6);
+}
+
+.error-text {
+  color: var(--red);
+  min-height: 1.2rem;
+  font-size: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+/* ---------- Chat screen ---------- */
+#chat-screen {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1.2rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-panel);
+}
+
+.brand {
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.cursor {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.status {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.status .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status.connected {
+  color: var(--green-bright);
+}
+.status.connected .dot {
+  background: var(--green-bright);
+  box-shadow: 0 0 6px var(--green-bright);
+}
+
+.status.disconnected {
+  color: var(--red);
+}
+.status.disconnected .dot {
+  background: var(--red);
+  box-shadow: 0 0 6px var(--red);
+}
+
+.chat-body {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.sidebar {
+  width: 180px;
+  border-right: 1px solid var(--border);
+  background: var(--bg-panel);
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.sidebar h3 {
+  font-size: 0.75rem;
+  color: var(--green-muted);
+  letter-spacing: 1px;
+  margin: 0 0 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.4rem;
+}
+
+#user-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+#user-list li {
+  padding: 0.25rem 0;
+  color: var(--green);
+}
+
+#user-list li::before {
+  content: "● ";
+  color: var(--green-bright);
+  font-size: 0.6rem;
+}
+
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 1.2rem;
+  font-size: 0.9rem;
+}
+
+.msg {
+  margin-bottom: 0.6rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.msg .time {
+  color: var(--green-dim);
+  font-size: 0.75rem;
+  margin-right: 0.5rem;
+}
+
+.msg .username {
+  color: var(--green-bright);
+  font-weight: bold;
+  margin-right: 0.4rem;
+}
+
+.msg.own .username {
+  color: #7dffb0;
+}
+
+.msg .text {
+  color: var(--green);
+}
+
+.msg.system {
+  color: var(--green-muted);
+  font-style: italic;
+  font-size: 0.82rem;
+}
+
+.typing-indicator {
+  min-height: 1.2rem;
+  padding: 0 1.2rem;
+  color: var(--green-muted);
+  font-size: 0.78rem;
+  font-style: italic;
+}
+
+.message-form {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg-panel);
+  padding: 0.7rem 1rem;
+}
+
+.message-form .prompt {
+  color: var(--green-bright);
+}
+
+#message-input {
+  flex: 1;
+  background: var(--bg-input);
+  border: 1px solid var(--green-dim);
+  color: var(--green-bright);
+  padding: 0.5rem 0.7rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+#message-input:focus {
+  border-color: var(--green-bright);
+  box-shadow: 0 0 8px rgba(51, 255, 102, 0.4);
+}
+
+#message-input::placeholder {
+  color: var(--green-dim);
+}
+
+/* ---------- Attach button ---------- */
+.attach-btn {
+  padding: 0.5rem 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+}
+
+.attach-btn:hover {
+  color: #000;
+}
+
+.file-input-hidden {
+  display: none;
+}
+
+/* ---------- Pending attachment chip (before sending) ---------- */
+.attachment-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 1rem;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--green-dim);
+  background: var(--bg-input);
+  font-size: 0.8rem;
+  color: var(--green);
+}
+
+.attachment-icon {
+  font-size: 0.9rem;
+}
+
+.attachment-name {
+  color: var(--green-bright);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 220px;
+}
+
+.attachment-size {
+  color: var(--green-muted);
+  font-size: 0.72rem;
+}
+
+.attachment-remove {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: var(--red);
+  padding: 0 0.3rem;
+  font-size: 0.85rem;
+}
+
+.attachment-remove:hover {
+  background: transparent;
+  box-shadow: none;
+  color: #ff8888;
+}
+
+/* ---------- File message bubbles (in the chat log) ---------- */
+.file-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 0.3rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--green-dim);
+  background: var(--bg-input);
+  max-width: 320px;
+}
+
+.file-card .file-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+
+.file-card .file-meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.file-card .file-name {
+  color: var(--green-bright);
+  font-size: 0.85rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-card .file-size {
+  color: var(--green-muted);
+  font-size: 0.72rem;
+}
+
+.file-card .download-link {
+  margin-left: auto;
+  color: var(--green-bright);
+  text-decoration: none;
+  border: 1px solid var(--green);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.72rem;
+  flex-shrink: 0;
+}
+
+.file-card .download-link:hover {
+  background: var(--green);
+  color: #000;
+}
+
+.image-preview {
+  display: block;
+  margin-top: 0.4rem;
+  max-width: 260px;
+  max-height: 220px;
+  border: 1px solid var(--green-dim);
+  cursor: pointer;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--green-dim);
+}
